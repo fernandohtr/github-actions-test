@@ -5,11 +5,14 @@ on: [push]
 jobs:
   run-shell-command:
     runs-on: ubuntu-latest
-    environment: teste1
     steps:
       - name: echo a string
-        run: eccho "Hello World"
+        run: echo "Hello World"
       - name: multiline script
         run: |
           node -v
           npm -v
+      - name: python command
+        run: |
+          import plataform print(plataform.processor())
+        shell: python
