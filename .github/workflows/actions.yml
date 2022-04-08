@@ -1,6 +1,9 @@
 name: Actions Workflow
 
-on: [push]
+on:
+  push:
+  pull_request:
+    types: [closed, assigned, opened, reopened]
 
 jobs:
   run-github-actions:
@@ -16,16 +19,20 @@ jobs:
           echo "${{ github.token }}"
           # echo clone git@github:$GITHUB_REPOSITORY
           # echo checkout $GITHUB_SHA
+
       - name: Checkout
         uses: actions/checkout@v1
+
       - name: List Files After Checkout
         run: |
           pwd
           ls -a
+
       - name: Simple JS Action
         id: greet
         uses: actions/hello-world-javascript-action@v1
         with: 
           who-to-greet: Fernando
+
       - name: Log Greeting Time
         run: echo "${{ steps.greet.outputs.time }}"
